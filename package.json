@@ -1,5 +1,6 @@
 {
   "name": "deployment",
+  "homepage": "https://kianaa81.github.io/Deployment/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
