@@ -1,91 +1,104 @@
-import React, { useState } from 'react';
-
-
+import './App.css';
+import React, {useState} from 'react';
 
 function App() {
 
-  const [todos, setTodos] = useState([]);
-  const [newTodo, setNewTodo] = useState("");
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setTodos([...todos, { id: Date.now(), text: newTodo, completed: false }]);
-    setNewTodo("");
-  };
-
-  const handleDeleteTodo = (id) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
-  };
-
-  const handleToggleCompleted = (id) => {
-    setTodos(
-      todos.map((todo) => {
-        if (todo.id === id) {
-          return { ...todo, completed: !todo.completed };
-        } else {
-          return todo;
-        }
-      })
-    );
-  };
-
-
-  const styles_div = {
-    color: 'rgb(148, 21, 120)',
-    marginLeft: '40em',
-    paddingTop: '8em'
-  };
-
-  const styles_list = {
-    color: 'rgb(21, 108, 148)',
-    fontSize: '2em',
-    fontFamily: 'Times New Roman, Times, serif'
-  };
-
-  const styles_btn = {
-    marginLeft: '2em',
-    fontSize: '0.6em',
-    color: 'rgb(148, 21, 120)',
-    fontFamily: 'Times New Roman, Times, serif'
+  const [showFinalResults, setFinalResults] = useState(false);
+  const [score, setScore] = useState(0);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const optionClicked = (isCorrect) => {
+    if (isCorrect) {
+      setScore(score + 1);
+    }
+    if (currentQuestion + 1 < questions.length){
+    setCurrentQuestion(currentQuestion +1);
+  } else {
+    setFinalResults (true);
+  }
   }
 
-  const styles_btn1 = {
-    marginLeft: '2em',
-    fontSize: '1em',
-    fontFamily: 'Times New Roman, Times, serif'
+  const playAgain = () => {
+    setScore(0);
+    setCurrentQuestion(0);
+    setFinalResults(false);
   }
+
+  const questions = [
+    {
+      text: "How many Harry Potter books are there?",
+      options: [
+        { id: 0, text: "3 Book", isCorrect: false },
+        { id: 1, text: "4 Books", isCorrect: false },
+        { id: 2, text: "8 Books", isCorrect: false },
+        { id: 3, text: "7 Books", isCorrect: true },
+      ],
+    },
+    {
+      text: "What is the name of Harry's owl?",
+      options: [
+        { id: 0, text: "Hedwig", isCorrect: true },
+        { id: 1, text: "Errol", isCorrect: false },
+        { id: 2, text: "Fawkes", isCorrect: false },
+        { id: 3, text: "Pigwidgeon", isCorrect: false },
+      ],
+    },
+    {
+      text: "Which Hogwarts house is known for its ambition and cunning?",
+      options: [
+        { id: 0, text: "Gryffindor", isCorrect: false },
+        { id: 1, text: "Ravenclaw", isCorrect: false },
+        { id: 2, text: "Slytherin", isCorrect: true },
+        { id: 3, text: "Hufflepuff", isCorrect: false },
+      ],
+    },
+    {
+      text: "Who is the Potions professor in Harry's first year at Hogwarts?",
+      options: [
+        { id: 0, text: "Minerva McGonagall", isCorrect: false },
+        { id: 1, text: "Serverus Snape", isCorrect: true },
+        { id: 2, text: "Albus Dumbledore", isCorrect: false },
+        { id: 3, text: "Rubeus Hagrid", isCorrect: false },
+      ],
+    },
+    {
+      text: "What charm is used to unlock doors?",
+      options: [
+        { id: 0, text: "Lumos", isCorrect: false },
+        { id: 1, text: "Alohomora", isCorrect: true },
+        { id: 2, text: "Incendio", isCorrect: true },
+        { id: 3, text: "Accio", isCorrect: false },
+      ],
+    },
+  ];
+
 
   return (
+    <div className="App">
+      <h1 className='titleName'>Harry Potter Quiz</h1>
+      <h2 className='titleName'>Current score: {score}</h2>
 
-    <div style={styles_div}>
+      {showFinalResults ? (
+              <div className='results'>
+              <h1>Final Results</h1>
+    
+              <button onClick={() => playAgain()}>Play Again</button>
+          </div>
+        ) : (
+        <div className='questions'>
+        <h2>Questions {currentQuestion + 1} out of {questions.length}</h2>
 
-      <ul style={styles_list}>
-        {todos.map((todo) => (
-          <li key={todo.id}>
-            <input
-              type="checkbox"
-              checked={todo.completed}
-              onChange={() => handleToggleCompleted(todo.id)}
-            />
-            <span style={{ textDecoration: todo.completed ? "line-through" : "none" }}>
-              {todo.text}
-            </span>
-            <button style={styles_btn} onClick={() => handleDeleteTodo(todo.id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
-
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={newTodo}
-          onChange={(event) => setNewTodo(event.target.value)}
-        />
-        <button style={styles_btn1} type="submit">Add To Do</button>
-      </form>
+        <h3 className='questionTxt'>{questions[currentQuestion].text}</h3>
+        <ul>
+          {questions[currentQuestion].options.map((option) => {
+          return(
+            <li onClick={() => optionClicked(option.isCorrect)} key={option.id}>{option.text}</li>
+          );
+        })}
+        </ul>
+      </div>
+        ) }
     </div>
   );
 }
 
 export default App;
-

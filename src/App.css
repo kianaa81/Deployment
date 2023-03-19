@@ -2,41 +2,65 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body{
+  background-color:rgb(62, 102, 177) ;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.questions{
+  background-color: rgb(66, 62, 99);
+  width: 80%;
+  height: auto;
+  padding: 16px;
+  color: whitesmoke;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px,
+  rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+  margin: auto;
+  border-radius: 30px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+ul {
+  list-style: none;
+}
+
+li{
+  background-color: rgb(132, 113, 150);
+  padding: 16px;
+  border: 2px solid whitesmoke;
+  border-radius: 30px;
+  font-size: 20px;
+  margin-top: 8px;
+}
+
+.questionTxt{
+  color: yellow;
+}
+
+.results{
+  background-color: rgb(66, 62, 99);
+  width: 50%;
+  height: auto;
+  padding: 16px;
+  color: whitesmoke;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px,
+  rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+  margin: auto;
+  border-radius: 30px;
+}
+
+button{
+  background-color: rgb(192, 40, 40);
+  border: none;
+  font-family:fantasy;
   color: white;
+  padding: 16px 24px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 24px;
 }
 
-.App-link {
-  color: #61dafb;
+.titleName {
+  color: rgb(41, 48, 109);
+  font-size: 2.5em;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-
-
-
